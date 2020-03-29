@@ -1,5 +1,9 @@
 # python generated files
 **/__pycache__/*
 
+# jupyter notebook generated files
+**/.ipynb_checkpoints
+**/*.ipynb
+
 # misc
 **/*.zip
