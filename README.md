@@ -1,4 +1,16 @@
 # Desafio Giant Steps
+
+## Como executar o projeto
+
+. Abrir terminal na pasta do projeto
+. Executar o comando: "docker-compose -f docker-compose.build.yml up --build"
+. Abrir o browser em "http://localhost:8080/api/swagger"
+. Chamar o endpoint desejado
+
+## Como testar
+
+. TODO
+
 ## Nosso desafio técnico
 
 Agora que você já chegou até aqui, temos um desafio técnico para você mostrar que está bem afiado com tecnologia!
@@ -8,7 +20,7 @@ PS: Não publique a sua resposta publicamente! Mande um invite de seu repositór
 
 ### Nosso fundo: Giant Zarathustra Fundo de Investimentos Multimercado
 
-Nosso fundo principal, o Giant Zarathustra, é um fundo de investimentos multimercado que conta 
+Nosso fundo principal, o Giant Zarathustra, é um fundo de investimentos multimercado que conta
 com algumas de nossas estratégias quantitativas.
 
 Dada a série histórica do fundo e do CDI disponível nos arquivos `cotas_cdi_dados.xlsx`, `zarathustra.csv` e `cdi.csv`, crie um programa que:
@@ -32,7 +44,7 @@ Dada a série histórica do fundo e do CDI disponível nos arquivos `cotas_cdi_d
 #### Inputs
 
  **start_date** 2019-01-02
- 
+
  **end_date** 2019-01-31
 
 #### Outputs

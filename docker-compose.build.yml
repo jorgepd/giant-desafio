@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+    return-calculator:
+        build:
+            context: .
+        container_name: return-calculator-1
+        ports:
+            - "8080:8080"
+        environment:
+            - FLASK_ENV=DEV
+
+
+# file used to build locally with following command:
+# docker-compose -f docker-compose.build.yml up --build

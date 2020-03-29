@@ -1,0 +1,15 @@
+# python generated files
+**/__pycache__
+
+# Visual Studio Code files
+.vscode
+
+# docs
+README.md
+
+# build files
+docker-compose.yml
+docker-compose.*.yml
+
+# misc
+**/*.csv
