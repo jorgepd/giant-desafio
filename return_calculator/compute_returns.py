@@ -1,5 +1,5 @@
 # standard imports
-from flask import Response
+# ...
 
 # custom imports
 from return_calculator.data import read_cdi_quota, read_fund_quota
@@ -25,7 +25,7 @@ def absolute_return(start_date, end_date):
     abs_ret = df['cota'].pct_change().add(1).cumprod()[-1]
     abs_ret = (abs_ret - 1) * 100
 
-    return '{:.4f}%'.format(abs_ret)
+    return abs_ret
 
 
 def relative_return(start_date, end_date):
@@ -43,16 +43,14 @@ def relative_return(start_date, end_date):
     target = fund.loc[start_date:end_date]
     benchmark = cdi.loc[start_date:end_date]
 
+    # compute absolute returns
+    target_returns = target['cota'].pct_change().add(1).cumprod()[-1]
+    benchmark_returns = benchmark['variação diária'].add(1).cumprod()[-1]
+
     # take diff
-    target_return = target['cota'].pct_change()
-    benchmark_return = benchmark['variação diária']
-    diff = target_return - benchmark_return
+    diff = target_returns - benchmark_returns
 
-    # compute real return
-    real_ret = diff.add(1).cumprod()[-1]
-    real_ret = (real_ret - 1) * 100
-
-    return '{:.4f}%'.format(real_ret)
+    return diff * 100
 
 
 def biggest_return(start_date, end_date):
@@ -76,7 +74,7 @@ def biggest_return(start_date, end_date):
     # locate date index
     date = abs_ret[abs_ret == max_ret].index[0]
 
-    return date.strftime('%Y-%m-%d') + ', ' + '{:.4f}%'.format(max_ret * 100)
+    return date, max_ret * 100
 
 
 def smallest_return(start_date, end_date):
@@ -100,15 +98,15 @@ def smallest_return(start_date, end_date):
     # locate date index
     date = abs_ret[abs_ret == min_ret].index[0]
 
-    return date.strftime('%Y-%m-%d') + ', ' + '{:.4f}%'.format(min_ret * 100)
+    return date, min_ret * 100
 
 
-def cummulative_return(start_date, end_date):
+def cummulative_returns(start_date, end_date):
     """
     Given a specified period, return a series of the fund's cummulative
     return
     """
-    logger.info('cummulative_return')
+    logger.info('cummulative_returns')
 
     # read data
     fund = read_fund_quota()
@@ -118,12 +116,9 @@ def cummulative_return(start_date, end_date):
 
     # compute absolute return
     cum_ret = df['cota'].pct_change().add(1).cumprod()
-
-    # format number into percent string
     cum_ret = cum_ret.add(-1) * 100
-    series = cum_ret.map('{:.4f}%'.format)[1:]
 
-    return Response(series.to_string())
+    return cum_ret[1:]
 
 
 def equity_evolution(start_date, end_date):
@@ -141,4 +136,4 @@ def equity_evolution(start_date, end_date):
     # compute equity diff
     diff = df['pl'][-1] - df['pl'][0]
 
-    return 'R$ {:,.2f}'.format(diff)
+    return diff

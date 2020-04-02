@@ -13,7 +13,7 @@ from apispec import APISpec
 from app.config import CONFIG
 
 # global variables
-logger = None
+logger = logging.getLogger()
 
 
 def create_app(config_name=None):
@@ -49,7 +49,7 @@ def create_app(config_name=None):
     docs = FlaskApiSpec()
     docs.init_app(app)
     document_endpoints(docs)
-    logger.info('App created')
+    logger.info(f'App created with {config_name} config')
 
     return app
 
@@ -70,12 +70,12 @@ def register_endpoints(app):
 def document_endpoints(docs):
     # return calculator functions
     from .api.return_calculator_endpoint import _absolute_return, _relative_return,\
-        _biggest_return, _smallest_return, _cummulative_return, _equity_evolution
+        _biggest_return, _smallest_return, _cummulative_returns, _equity_evolution
 
     # return calculator endpoints
     docs.register(_absolute_return, blueprint='return_calculator_endpoint')
     docs.register(_relative_return, blueprint='return_calculator_endpoint')
     docs.register(_biggest_return, blueprint='return_calculator_endpoint')
     docs.register(_smallest_return, blueprint='return_calculator_endpoint')
-    docs.register(_cummulative_return, blueprint='return_calculator_endpoint')
+    docs.register(_cummulative_returns, blueprint='return_calculator_endpoint')
     docs.register(_equity_evolution, blueprint='return_calculator_endpoint')

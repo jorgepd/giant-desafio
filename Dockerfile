@@ -10,4 +10,6 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
+RUN pytest --cov=. tests/
+
 CMD ["bash", "run.sh"]

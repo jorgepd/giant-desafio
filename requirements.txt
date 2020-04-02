@@ -4,6 +4,7 @@ attrs==19.3.0
 certifi==2019.11.28
 click==7.1.1
 colorama==0.4.3
+coverage==5.0.4
 Flask==1.1.1
 flask-apispec==0.8.7
 gunicorn==20.0.4
@@ -20,6 +21,7 @@ pluggy==0.13.1
 py==1.8.1
 pyparsing==2.4.6
 pytest==5.4.1
+pytest-cov==2.8.1
 python-dateutil==2.8.1
 pytz==2019.3
 PyYAML==5.3
