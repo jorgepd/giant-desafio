@@ -32,7 +32,7 @@ def create_app(config_name=None):
     # define API specifications
     app.config.update({
     'APISPEC_SPEC': APISpec(
-        title='flask_api',
+        title='return_calculator_api',
         version=app.config.get('VERSION'),
         openapi_version='2.0',
         plugins=[
@@ -62,13 +62,20 @@ def init_logger(app):
     logger = app.logger
 
 def register_endpoints(app):
-    # simple endpoint
-    from .api.simple_endpoint import simple_endpoint_api
+    # return calculator
+    from .api import return_calculator_api
 
-    app.register_blueprint(simple_endpoint_api, url_prefix='/api')
+    app.register_blueprint(return_calculator_api, url_prefix='/api')
 
 def document_endpoints(docs):
-    # simple endpoint
-    from .api.simple_endpoint import hello
+    # return calculator functions
+    from .api.return_calculator_endpoint import _absolute_return, _relative_return,\
+        _biggest_return, _smallest_return, _cummulative_return, _equity_evolution
 
-    docs.register(hello, blueprint='simple_endpoint')
+    # return calculator endpoints
+    docs.register(_absolute_return, blueprint='return_calculator_endpoint')
+    docs.register(_relative_return, blueprint='return_calculator_endpoint')
+    docs.register(_biggest_return, blueprint='return_calculator_endpoint')
+    docs.register(_smallest_return, blueprint='return_calculator_endpoint')
+    docs.register(_cummulative_return, blueprint='return_calculator_endpoint')
+    docs.register(_equity_evolution, blueprint='return_calculator_endpoint')

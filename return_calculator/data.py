@@ -1,14 +1,22 @@
 # standard imports
 import pandas as pd
+import os
+
+# custom imports
+from app import logger
+
+mypath = os.path.dirname(__file__)
 
 
 def read_fund_quota():
     """
     Read and parse fund data
     """
+    logger.info('read_fund_quota')
 
     # read
-    quota = pd.read_csv('zarathustra.csv')
+    path = os.path.join(mypath, '../zarathustra.csv')
+    quota = pd.read_csv(path)
 
     # set index
     quota['data'] = pd.to_datetime(quota['data'])
@@ -20,9 +28,11 @@ def read_cdi_quota():
     """
     Read and parse CDI data
     """
+    logger.info('read_cdi_quota')
 
     # read
-    cdi = pd.read_csv('cdi.csv')
+    path = os.path.join(mypath, '../cdi.csv')
+    cdi = pd.read_csv(path)
 
     # set index
     cdi['date'] = pd.to_datetime(cdi['date'])

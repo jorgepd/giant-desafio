@@ -1,5 +1,5 @@
 from flask import Blueprint
 
-simple_endpoint_api = Blueprint('simple_endpoint', __name__)
+return_calculator_api = Blueprint('return_calculator_endpoint', __name__)
 
-from . import simple_endpoint
+from . import return_calculator_endpoint
