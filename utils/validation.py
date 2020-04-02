@@ -26,3 +26,15 @@ def assert_date_range(start_date, end_date):
         abort(400)
 
     return start_date, end_date
+
+
+def get_slice(start_date, end_date, df):
+    # slice df
+    sliced = df.loc[start_date: end_date]
+
+    # no data
+    if(len(sliced) <= 1):
+        logger.error('There is no data between these 2 dates, try widening the range')
+        abort(400)
+
+    return sliced

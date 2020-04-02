@@ -3,7 +3,7 @@
 
 # custom imports
 from return_calculator.data import read_cdi_quota, read_fund_quota
-from utils.validation import assert_date_range
+from utils.validation import assert_date_range, get_slice
 
 from app import logger
 
@@ -19,7 +19,7 @@ def absolute_return(start_date, end_date):
     fund = read_fund_quota()
 
     # get data slice
-    df = fund.loc[start_date:end_date]
+    df = get_slice(start_date, end_date, fund)
 
     # compute absolute return
     abs_ret = df['cota'].pct_change().add(1).cumprod()[-1]
@@ -40,8 +40,8 @@ def relative_return(start_date, end_date):
     cdi = read_cdi_quota()
 
     # get data slice
-    target = fund.loc[start_date:end_date]
-    benchmark = cdi.loc[start_date:end_date]
+    target = get_slice(start_date, end_date, fund)
+    benchmark = get_slice(start_date, end_date, cdi)
 
     # compute absolute returns
     target_returns = target['cota'].pct_change().add(1).cumprod()[-1]
@@ -65,7 +65,7 @@ def biggest_return(start_date, end_date):
     fund = read_fund_quota()
 
     # get data slice
-    df = fund.loc[start_date:end_date]
+    df = get_slice(start_date, end_date, fund)
 
     # compute absolute return
     abs_ret = df['cota'].pct_change()
@@ -89,7 +89,7 @@ def smallest_return(start_date, end_date):
     fund = read_fund_quota()
 
     # get data slice
-    df = fund.loc[start_date:end_date]
+    df = get_slice(start_date, end_date, fund)
 
     # compute absolute return
     abs_ret = df['cota'].pct_change()
@@ -112,7 +112,7 @@ def cummulative_returns(start_date, end_date):
     fund = read_fund_quota()
 
     # get data slice
-    df = fund.loc[start_date:end_date]
+    df = get_slice(start_date, end_date, fund)
 
     # compute absolute return
     cum_ret = df['cota'].pct_change().add(1).cumprod()
@@ -131,7 +131,7 @@ def equity_evolution(start_date, end_date):
     fund = read_fund_quota()
 
     # get data slice
-    df = fund.loc[start_date:end_date]
+    df = get_slice(start_date, end_date, fund)
 
     # compute equity diff
     diff = df['pl'][-1] - df['pl'][0]

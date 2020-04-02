@@ -7,9 +7,9 @@
 . Abrir o browser em "http://localhost:8080/api/swagger"
 . Chamar o endpoint desejado
 
-## Como testar
+## Como testar o projeto
 
-. TODO
+. Os testes rodam na execução do projeto, nesse momento também é mostrado um relatório de cobertura dos testes na tela
 
 ## Nosso desafio técnico
 
